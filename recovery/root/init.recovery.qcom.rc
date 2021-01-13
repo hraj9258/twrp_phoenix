@@ -33,6 +33,7 @@ on fs
     chmod 0664 /dev/ion
     chown system system /dev/ion
     install_keyring
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
 
 on early-fs
     start vold
