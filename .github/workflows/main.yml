@@ -66,7 +66,7 @@ jobs:
               sudo zip -r9 TWRP-phoenix.zip recovery.img
               ls > ls.txt
               curl -F chat_id=$CHAT_ID -F document=@ls.txt -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Check it ot @hraj9258"
-              curl -F chat_id=$CHAT_ID -F document=@TWRP-phoenix.zip -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @ERROR1122 @facebook6ix9ine"
+              curl -F chat_id=$CHAT_ID -F document=@TWRP-phoenix.zip -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @facebook6ix9ine"
               curl -F chat_id=$CHAT_ID -F document=@recovery.img -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument
               curl -sL https://git.io/file-transfer | sh
               ./transfer wet TWRP-phoenix.zip
