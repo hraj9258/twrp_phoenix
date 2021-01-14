@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/xiaomi/phoenixin
+DEVICE_PATH := device/xiaomi/phoenix
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -37,7 +37,7 @@ TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := phoenixin
+TARGET_OTA_ASSERT_DEVICE := phoenix, phoenixin
 
 # File systems
 BOARD_HAS_LARGE_FILESYSTEM := true

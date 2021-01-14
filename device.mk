@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/xiaomi/phoenixin
+LOCAL_PATH := device/xiaomi/phoenix
 
 # Qcom standerd Decryption
 PRODUCT_PACKAGES += \
@@ -38,7 +38,7 @@ PRODUCT_HOST_PACKAGES += \
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := phoenixin
-PRODUCT_NAME := omni_phoenixin
+PRODUCT_NAME := omni_phoenix
 PRODUCT_BRAND := POCO
 PRODUCT_MODEL := POCO X2
 PRODUCT_MANUFACTURER := xiaomi

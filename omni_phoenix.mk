@@ -16,5 +16,15 @@
 # limitations under the License.
 #
 
-add_lunch_combo omni_phoenixin-userdebug
-add_lunch_combo omni_phoenixin-eng
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/embedded.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+
+# Inherit from phoenix device
+$(call inherit-product, device/xiaomi/phoenix/device.mk)
+
+# Inherit some common Omni stuff.
+$(call inherit-product, vendor/omni/config/common.mk)
