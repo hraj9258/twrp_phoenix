@@ -37,7 +37,7 @@ PRODUCT_HOST_PACKAGES += \
     libandroidicu
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := phoenixin
+PRODUCT_DEVICE := phoenix
 PRODUCT_NAME := omni_phoenix
 PRODUCT_BRAND := POCO
 PRODUCT_MODEL := POCO X2
