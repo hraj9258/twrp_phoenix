@@ -36,14 +36,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
 
-# Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := phoenix
-PRODUCT_NAME := omni_phoenix
-PRODUCT_BRAND := POCO
-PRODUCT_MODEL := POCO X2
-PRODUCT_MANUFACTURER := xiaomi
-PRODUCT_RELEASE_NAME := POCO X2
-
 # HACK: Set vendor patch level
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2099-12-31

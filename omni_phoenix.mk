@@ -28,3 +28,11 @@ $(call inherit-product, device/xiaomi/phoenix/device.mk)
 
 # Inherit some common Omni stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
+
+# Device identifier. This must come after all inclusions
+PRODUCT_DEVICE := phoenix
+PRODUCT_NAME := omni_phoenix
+PRODUCT_BRAND := POCO
+PRODUCT_MODEL := POCO X2
+PRODUCT_MANUFACTURER := xiaomi
+PRODUCT_RELEASE_NAME := POCO X2
