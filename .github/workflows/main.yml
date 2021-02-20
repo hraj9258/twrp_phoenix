@@ -20,7 +20,7 @@ env:
   DEVICE: phoenix
   DT_LINK: https://github.com/hraj9258/twrp_phoenix
   DT_PATH: device/xiaomi/phoenix
-  CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
+  CHAT_ID: ${{ secrets.TEST_CHAT_ID }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   TARGET: recoveryimage
   TZ: Asia/Kolkata
