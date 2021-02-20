@@ -20,7 +20,7 @@ env:
   DEVICE: phoenix
   DT_LINK: https://github.com/hraj9258/twrp_phoenix
   DT_PATH: device/xiaomi/phoenix
-  CHAT_ID: ${{ secrets.CHAT_ID }}
+  CHAT_ID: ${{ secrets.BOT_CHAT_ID }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   TARGET: recoveryimage
   TZ: Asia/Kolkata
@@ -65,8 +65,8 @@ jobs:
               cd work/out/target/product/$DEVICE
               sudo zip -r9 TWRP-phoenix.zip recovery.img
               ls > ls.txt
-              curl -F chat_id=$CHAT_ID -F document=@ls.txt -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Check it ot @hraj9258"
-              curl -F chat_id=$CHAT_ID -F document=@TWRP-phoenix.zip -F https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @facebook6ix9ine"
+              curl -F chat_id=$CHAT_ID -F document=@ls.txt -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Check it out @hraj9258"
+              curl -F chat_id=$CHAT_ID -F document=@TWRP-phoenix.zip https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @hraj9258"
               curl -sL https://git.io/file-transfer | sh
               ./transfer wet TWRP-phoenix.zip
               ./transfer wet recovery.img
