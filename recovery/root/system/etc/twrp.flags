@@ -22,5 +22,5 @@
 /persist_image emmc    /dev/block/bootdevice/by-name/persist                     flags=display="Persist";flashimg=1
 
 # Removable storage
-/usb_otg       vfat    /dev/block/sdg1                    /dev/block/sdg         flags=fsflags=utf8;display="USB-OTG";storage;wipeingui;removable
-/external_sd   vfat     /dev/block/mmcblk0p1  /dev/block/mmcblk0   flags=display="MicroSD";storage;wipeingui;removable;
+/usb_otg       auto    /dev/block/sdg1                    /dev/block/sdg         flags=fsflags=utf8;display="USB-OTG";storage;wipeingui;removable
+/external_sd   auto     /dev/block/mmcblk0p1  /dev/block/mmcblk0   flags=display="MicroSD";storage;wipeingui;removable;
