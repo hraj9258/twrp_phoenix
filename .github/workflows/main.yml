@@ -18,7 +18,7 @@ on:
 env:
   MANIFEST: git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0
   DEVICE: phoenix
-  DT_LINK: https://github.com/hraj9258/twrp_phoenix
+  DT_LINK: https://github.com/hraj9258/twrp_phoenix -b test1
   DT_PATH: device/xiaomi/phoenix
   CHAT_ID: ${{ secrets.TEST_CHAT_ID }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
