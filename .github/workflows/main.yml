@@ -16,9 +16,9 @@ on:
     types: [started]
 
 env:
-  MANIFEST: git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0
+  MANIFEST: git://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
   DEVICE: phoenix
-  DT_LINK: https://github.com/hraj9258/twrp_phoenix
+  DT_LINK: https://github.com/hraj9258/twrp_phoenix -b a11
   DT_PATH: device/xiaomi/phoenix
   CHAT_ID: ${{ secrets.TEST_CHAT_ID }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
@@ -51,7 +51,7 @@ jobs:
          run: |
              mkdir work
              cd work
-             repo init -u $MANIFEST --depth=1 --groups=all,-notdefault,-device,-darwin,-x86,-mips
+             repo init -u $MANIFEST --depth=1 --partial-clone --clone-filter=blob:limit=10M --groups=all,-notdefault,-device,-darwin,-x86,-mips
              repo sync -j4
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
              
@@ -63,10 +63,10 @@ jobs:
        - name: Uploading recovery image
          run: |
               cd work/out/target/product/$DEVICE
-              sudo zip -r9 TWRP-phoenix.zip recovery.img
+              sudo zip -r9 TWRP-phoenix-a11.zip recovery.img
               ls > ls.txt
               curl -F chat_id=$CHAT_ID -F document=@ls.txt -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Check it out @hraj9258"
-              curl -F chat_id=$CHAT_ID -F document=@TWRP-phoenix.zip https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @hraj9258"
+              curl -F chat_id=$CHAT_ID -F document=@TWRP-phoenix-a11.zip https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @hraj9258"
               curl -sL https://git.io/file-transfer | sh
-              ./transfer wet TWRP-phoenix.zip
+              ./transfer wet TWRP-phoenix-a11.zip
               ./transfer wet recovery.img
