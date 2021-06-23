@@ -1,4 +1,4 @@
-name: Building recovery
+name: Building TWRP Android 11
 
 on:
 #  release:
@@ -47,19 +47,20 @@ jobs:
             sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
             sudo chmod a+rx /usr/local/bin/repo
             
-       - name: Sync recovery source and device tree
+       - name: Sync TWRP A11 source and device tree
          run: |
              mkdir work
              cd work
              repo init -u $MANIFEST --depth=1 --partial-clone --clone-filter=blob:limit=10M --groups=all,-notdefault,-device,-darwin,-x86,-mips
-             repo sync -j4
              repo sync -j4
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
              
        - name: Building TWRP
          run: |
               cd work
-              . build/envsetup.sh &&lunch twrp_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
+              . build/envsetup.sh &&lunch twrp_$DEVICE-eng 
+              repo sync -j4
+              export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
              
        - name: Uploading recovery image
          run: |
