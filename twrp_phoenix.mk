@@ -22,6 +22,9 @@ $(call inherit-product, device/xiaomi/phoenix/device.mk)
 # Inherit custom TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root) \
+    $(LOCAL_PATH)/prebuilt/dtb:dtb.img
+
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := phoenix
 PRODUCT_NAME := twrp_phoenix
