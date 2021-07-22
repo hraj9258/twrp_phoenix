@@ -112,11 +112,6 @@ BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := product vendor system odm
 BOARD_ROOT_EXTRA_FOLDERS := bluetooth dsp firmware persist
 BOARD_SUPPRESS_SECURE_ERASE := true
 
-# Init
-TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_phoenix
-TARGET_RECOVERY_DEVICE_MODULES := libinit_phoenix
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc/
-
 # TWRP Configuration
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 RECOVERY_SDCARD_ON_DATA := true
