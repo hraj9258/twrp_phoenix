@@ -28,7 +28,7 @@ case $project in
     "INDIA")
         load_phoenixin
         ;;
-    *)
+    "CN")
         load_phoenix
         ;;
 esac
