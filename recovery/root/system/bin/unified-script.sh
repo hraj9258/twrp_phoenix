@@ -13,11 +13,11 @@ load_phoenixin()
 
 load_phoenix()
 {
-    resetprop "ro.product.model" "Redmi K30"
-    resetprop "ro.product.name" "phoenix"
-    resetprop "ro.build.product" "phoenix"
-    resetprop "ro.product.device" "phoenix"
-    resetprop "ro.vendor.product.device" "phoenix"
+    setprop "ro.product.model" "Redmi K30"
+    setprop "ro.product.name" "phoenix"
+    setprop "ro.build.product" "phoenix"
+    setprop "ro.product.device" "phoenix"
+    setprop "ro.vendor.product.device" "phoenix"
 }
 
 
