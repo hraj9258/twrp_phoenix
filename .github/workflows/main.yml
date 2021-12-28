@@ -16,7 +16,7 @@ on:
     types: [started]
 
 env:
-  MANIFEST: git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0-deprecated
+  MANIFEST: git://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
   DEVICE: phoenix
   DT_LINK: https://github.com/hraj9258/twrp_phoenix
   DT_PATH: device/xiaomi/phoenix
@@ -51,22 +51,10 @@ jobs:
          run: |
              mkdir work
              cd work
-             repo init -u $MANIFEST --depth=1 --groups=all,-notdefault,-device,-darwin,-x86,-mips
+             repo init -u $MANIFEST --depth=1 --groups=all,-notdefault,-device,-darwin,-x86,-mips --no-clone-bundle --no-tags
              repo sync -j4
-             git clone $DT_LINK --depth=1 --single-branch $DT_PATH
-             
-       - name: Building TWRP
-         run: |
-              cd work
-              . build/envsetup.sh &&lunch omni_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
-             
-       - name: Uploading recovery image
-         run: |
-              cd work/out/target/product/$DEVICE
-              sudo zip -r9 TWRP-phoenix.zip recovery.img
-              ls > ls.txt
-              curl -F chat_id=$CHAT_ID -F document=@ls.txt -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Check it out @hraj9258"
-              curl -F chat_id=$CHAT_ID -F document=@TWRP-phoenix.zip https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @hraj9258"
-              curl -sL https://git.io/file-transfer | sh
-              ./transfer wet TWRP-phoenix.zip
-              ./transfer wet recovery.img
+             cd ..
+             7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on cts-a11.7z work
+             curl -F chat_id=$CHAT_ID -F document=@cts-a11.7z https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @hraj9258"
+             curl -sL https://git.io/file-transfer | sh
+             ./transfer wet cts-a11.7z             
