@@ -101,6 +101,7 @@ VENDOR_SECURITY_PATCH := 2099-12-31
 
 # Avb
 BOARD_AVB_ENABLE := true
+BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
@@ -147,3 +148,10 @@ TW_DEVICE_VERSION := -hraj9258
 TWRP_INCLUDE_LOGCAT := true
 # TWRP Debug Flags
 TARGET_USES_LOGD := true
+
+BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
+--prop com.android.build.recovery.fingerprint:POCO/phoenixin/phoenixin:11/RKQ1.200826.002/V12.5.6.0.RGHINXM:user/release-keys \
+--prop com.android.build.boot.fingerprint:POCO/phoenixin/phoenixin:11/RKQ1.200826.002/V12.5.6.0.RGHINXM:user/test-keys \
+--prop com.android.build.boot.os_version:11 \
+--prop com.android.build.boot.security_patch:2099-12-31 \
+--prop com.android.build.boot.security_patch:2099-12-31
