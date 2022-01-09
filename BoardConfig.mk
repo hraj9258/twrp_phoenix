@@ -88,8 +88,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Hack: prevent anti rollback
-PLATFORM_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 127
+PLATFORM_SECURITY_PATCH := 2021-11-01
+PLATFORM_VERSION := 11
 PLATFORM_VERSION_LAST_STABLE := 127
 #Encryption 
 TW_INCLUDE_CRYPTO := true
@@ -148,10 +148,10 @@ TW_DEVICE_VERSION := -hraj9258
 TWRP_INCLUDE_LOGCAT := true
 # TWRP Debug Flags
 TARGET_USES_LOGD := true
+# Strace
+TARGET_RECOVERY_DEVICE_MODULES += strace
+RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/strace
 
 BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
---prop com.android.build.recovery.fingerprint:POCO/phoenixin/phoenixin:11/RKQ1.200826.002/V12.5.6.0.RGHINXM:user/release-keys \
 --prop com.android.build.boot.fingerprint:POCO/phoenixin/phoenixin:11/RKQ1.200826.002/V12.5.6.0.RGHINXM:user/test-keys \
---prop com.android.build.boot.os_version:11 \
---prop com.android.build.boot.security_patch:2099-12-31 \
---prop com.android.build.boot.security_patch:2099-12-31
+--prop com.android.build.boot.security_patch:2021-11-01
