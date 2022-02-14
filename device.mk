@@ -35,6 +35,8 @@ TARGET_RECOVERY_DEVICE_MODULES += libion
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
 
+# Exclude APEX
+TW_EXCLUDE_APEX := true
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
