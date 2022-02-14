@@ -37,3 +37,6 @@ on fs
 
 on boot
     start health-hal-2-1
+
+on post-fs
+    start boot-hal-1-0
