@@ -21,6 +21,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
 LOCAL_PATH := device/xiaomi/phoenix
 
+PRODUCT_SHIPPING_API_LEVEL := 29
+
 # Qcom standerd Decryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
@@ -37,15 +39,18 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 
 # Exclude APEX
 TW_EXCLUDE_APEX := true
+
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libandroidicu
+
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
 	android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd
 
-# Apex libraries
-PRODUCT_HOST_PACKAGES += \
-    libandroidicu
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/target/product/phoenix/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so
 
 BUILD_FINGERPRINT_FROM_FILE := POCO/phoenixin/phoenixin:11/RKQ1.200826.002/V12.5.6.0.RGHINXM:user/release-keys
 
