@@ -18,12 +18,13 @@ on:
 env:
   MANIFEST: git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-10.0-deprecated
   DEVICE: phoenix
-  DT_LINK: https://github.com/hraj9258/twrp_phoenix
+  DT_LINK: https://github.com/hraj9258/twrp_phoenix -b android-10
   DT_PATH: device/xiaomi/phoenix
   CHAT_ID: ${{ secrets.TEST_CHAT_ID }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   TARGET: recoveryimage
   TZ: Asia/Kolkata
+  ZIP_NAME: TWRP_PHOENIX_A10.zip
 
 jobs:
   build:
@@ -63,10 +64,8 @@ jobs:
        - name: Uploading recovery image
          run: |
               cd work/out/target/product/$DEVICE
-              sudo zip -r9 TWRP-phoenix.zip recovery.img
-              ls > ls.txt
-              curl -F chat_id=$CHAT_ID -F document=@ls.txt -F parse_mode=markdown https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Check it out @hraj9258"
-              curl -F chat_id=$CHAT_ID -F document=@TWRP-phoenix.zip https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @hraj9258"
+              sudo zip -r9 $ZIP_NAME recovery.img
+              curl -F chat_id=$CHAT_ID -F document=@ZIP_NAME https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please check it out \n By: @hraj9258"
               curl -sL https://git.io/file-transfer | sh
               ./transfer wet TWRP-phoenix.zip
               ./transfer wet recovery.img
