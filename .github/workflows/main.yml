@@ -65,7 +65,7 @@ jobs:
          run: |
               cd work/out/target/product/$DEVICE
               sudo zip -r9 $ZIP_NAME recovery.img
-              curl -F chat_id=$CHAT_ID -F document=@ZIP_NAME https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please check it out \n By: @hraj9258"
+              curl -F chat_id=$CHAT_ID -F document=@$ZIP_NAME https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please check it out \n By: @hraj9258"
               curl -sL https://git.io/file-transfer | sh
-              ./transfer wet TWRP-phoenix.zip
+              ./transfer wet $ZIP_NAME
               ./transfer wet recovery.img
