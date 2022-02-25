@@ -60,7 +60,9 @@ jobs:
               cd work
               . build/envsetup.sh &&lunch twrp_$DEVICE-eng 
               repo sync -j4
-              export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
+              export ALLOW_MISSING_DEPENDENCIES=true
+              rm -rf .repo/
+              mka $TARGET
              
        - name: Uploading recovery image
          run: |
