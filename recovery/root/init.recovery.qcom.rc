@@ -25,18 +25,12 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#Qcom Default Decryption
+# Qcom TWRP Default Decryption
 import /init.recovery.qcom_decrypt.rc
 
-on init
-    setprop prepdecrypt.loglevel 2
+#on init
+#    setprop prepdecrypt.loglevel 2
     
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
-on boot
-    start health-hal-2-1
-
-on post-fs
-    start boot-hal-1-0

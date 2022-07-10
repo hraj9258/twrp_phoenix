@@ -16,23 +16,33 @@
 # limitations under the License.
 #
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
-
-LOCAL_PATH := device/xiaomi/phoenix
-
 PRODUCT_SHIPPING_API_LEVEL := 29
+
+# Dynamic partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+#Encryption 
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_METADATA_PARTITION := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
+
+# PLATFORM
+PLATFORM_VERSION := 127
+PLATFORM_SECURITY_PATCH := 2127-12-31
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 
 # Qcom standerd Decryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
-# Dynamic partitions
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
 # Recovery
-TARGET_RECOVERY_DEVICE_MODULES += libion
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libion
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
@@ -40,20 +50,10 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 # Exclude APEX
 TW_EXCLUDE_APEX := true
 
-TARGET_RECOVERY_DEVICE_MODULES += \
-    libandroidicu
-
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
 	android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd
 
-PRODUCT_COPY_FILES += \
-    $(OUT_DIR)/target/product/phoenix/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so
-
-BUILD_FINGERPRINT_FROM_FILE := POCO/phoenixin/phoenixin:11/RKQ1.200826.002/V12.5.6.0.RGHINXM:user/release-keys
-
-# HACK: Set vendor patch level
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=2099-12-31
+# BUILD_FINGERPRINT_FROM_FILE := POCO/phoenixin/phoenixin:11/RKQ1.200826.002/V12.5.6.0.RGHINXM:user/release-keys

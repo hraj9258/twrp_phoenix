@@ -16,14 +16,17 @@
 # limitations under the License.
 #
 
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+
+# Inherit from this product for devices that support only 64-bit apps using:
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+
 # Inherit from phoenix device
 $(call inherit-product, device/xiaomi/phoenix/device.mk)
 
 # Inherit custom TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
-
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root) \
-    $(LOCAL_PATH)/prebuilt/dtb.img:dtb.img
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := phoenix
