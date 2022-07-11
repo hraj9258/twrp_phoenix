@@ -35,6 +35,9 @@ VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/qcom/opensource/commonsys-intf/display
+
 # Qcom standerd Decryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
@@ -42,10 +45,14 @@ PRODUCT_PACKAGES += \
 
 # Recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
-    libion
+    libion \
+    vendor.display.config@1.0 \
+    vendor.display.config@2.0
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
+    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@1.0.so \
+    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
 
 # Exclude APEX
 TW_EXCLUDE_APEX := true
