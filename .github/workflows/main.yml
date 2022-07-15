@@ -1,4 +1,4 @@
-name: Building TWRP Android 11
+name: Building TWRP Android-12.1
 
 on:
 #  release:
@@ -16,14 +16,14 @@ on:
     types: [started]
 
 env:
-  MANIFEST: git://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
+  MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
   DEVICE: phoenix
-  DT_LINK: https://github.com/hraj9258/twrp_phoenix -b a11
+  DT_LINK: https://github.com/hraj9258/twrp_phoenix -b android-12.1
   DT_PATH: device/xiaomi/phoenix
   CHAT_ID: ${{ secrets.TEST_CHAT_ID }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   TARGET: recoveryimage
-  ZIP_NAME: TWRP_PHOENIX_A11.zip
+  ZIP_NAME: TWRP_PHOENIX_A12.1.zip
   TZ: Asia/Kolkata
 
 jobs:
@@ -48,20 +48,25 @@ jobs:
             sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
             sudo chmod a+rx /usr/local/bin/repo
             
-       - name: Sync TWRP A11 source and device tree
+       - name: Sync TWRP A12.1 source and device tree and pick some gerrit patches
          run: |
              mkdir work
              cd work
              repo init -u $MANIFEST --depth=1 --partial-clone --clone-filter=blob:limit=10M --groups=all,-notdefault,-device,-darwin,-x86,-mips
              repo sync -j4
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
+
+       - name: Set Swap Space
+         uses: pierotofy/set-swap-space@master
+         with:
+          swap-size-gb: 12
              
        - name: Building TWRP
          run: |
               cd work
-              . build/envsetup.sh &&lunch twrp_$DEVICE-eng 
-              repo sync -j4
-              export ALLOW_MISSING_DEPENDENCIES=true
+              . build/envsetup.sh 
+              repopick 5405 5540
+              lunch twrp_$DEVICE-eng 
               rm -rf .repo/
               mka $TARGET
              
