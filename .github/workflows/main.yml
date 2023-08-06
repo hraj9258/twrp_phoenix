@@ -1,4 +1,4 @@
-name: Building TWRP Android-12.1
+name: Building PBRP Android-12.1
 
 on:
 #  release:
@@ -16,19 +16,22 @@ on:
     types: [started]
 
 env:
-  MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
-  DEVICE: phoenix
-  DT_LINK: https://github.com/hraj9258/twrp_phoenix -b android-12.1
-  DT_PATH: device/xiaomi/phoenix
+  MANIFEST=https://github.com/PitchBlackRecoveryProject/manifest_pb -b android-12.1
+  DEVICE: fog
+  DT_LINK: https://github.com/boedhack99/device_xiaomi_fog-TWRP -b twrp-12.1
+  DT_PATH: device/xiaomi/fog
+  KERNEL_REPOSITORY: https://github.com/dblenk-project/kernel_xiaomi_fog_header
+  TARGET_PATH: kernel/xiaomi/fog
+  REVISION: lineage-20
   CHAT_ID: ${{ secrets.TEST_CHAT_ID }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
   TARGET: recoveryimage
-  ZIP_NAME: TWRP_PHOENIX_A12.1.zip
+  ZIP_NAME: PBRP_fog_A12.1.zip
   TZ: Asia/Kolkata
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     steps:
        - name: Checkout
@@ -48,7 +51,7 @@ jobs:
             sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
             sudo chmod a+rx /usr/local/bin/repo
             
-       - name: Sync TWRP A12.1 source and device tree and pick some gerrit patches
+       - name: Sync PBRP A12.1 source and device tree and pick some gerrit patches
          run: |
              mkdir work
              cd work
@@ -70,11 +73,11 @@ jobs:
               rm -rf .repo/
               mka $TARGET
              
-       - name: Uploading recovery image
+       - name: Uploading boot image
          run: |
               cd work/out/target/product/$DEVICE
-              sudo zip -r9 $ZIP_NAME recovery.img
+              sudo zip -r9 $ZIP_NAME boot.img
               curl -F chat_id=$CHAT_ID -F document=@$ZIP_NAME https://api.telegram.org/bot$BOT_TOKEN/sendDocument -F caption="Please test it @hraj9258"
               curl -sL https://git.io/file-transfer | sh
               ./transfer wet $ZIP_NAME
-              ./transfer wet recovery.img
+              ./transfer wet boot.img
